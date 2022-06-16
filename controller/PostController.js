@@ -4,6 +4,11 @@ import PostService from "../service/PostService.js";
 class PostController {
 
   async create(req, res) {
+    if (req.method === "OPTIONS") {
+      res.header('Access-Control-Allow-Origin', req.headers.origin);
+    } else {
+      res.header('Access-Control-Allow-Origin', '*');
+    }
     try {
       const post = await PostService.create(req.body);
       res.json(post);
